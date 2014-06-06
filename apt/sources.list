@@ -1,0 +1,3 @@
+deb http://mirrors.digitalocean.com/debian wheezy main
+deb http://security.debian.org/ wheezy/updates main
+
