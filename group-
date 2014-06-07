@@ -47,3 +47,5 @@ avahi:x:107:
 netdev:x:108:
 fuse:x:109:
 ssl-cert:x:110:
+openerp:x:111:
+postgres:x:112:

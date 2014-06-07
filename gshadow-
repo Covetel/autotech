@@ -47,3 +47,5 @@ avahi:!::
 netdev:!::
 fuse:!::
 ssl-cert:!::
+openerp:!::
+postgres:!::

@@ -21,4 +21,5 @@ Debian-exim:x:101:103::/var/spool/exim4:/bin/false
 messagebus:x:102:106::/var/run/dbus:/bin/false
 avahi:x:103:107:Avahi mDNS daemon,,,:/var/run/avahi-daemon:/bin/false
 sshd:x:104:65534::/var/run/sshd:/usr/sbin/nologin
-openerp:x:105:111::/home/openerp:/bin/false
+openerp:x:105:111:OpenERP,,,:/home/openerp:/bin/false
+postgres:x:106:112::/var/lib/postgresql:/bin/bash
