@@ -27,13 +27,19 @@ server {
 	# Make site accessible from http://localhost/
 	server_name localhost;
 
-	location / {
-		# First attempt to serve request as file, then
-		# as directory, then fall back to displaying a 404.
-		try_files $uri $uri/ /index.html;
-		# Uncomment to enable naxsi on this location
-		# include /etc/nginx/naxsi.rules
-	}
+	location / { 
+       	        resolver 4.2.2.1;
+                proxy_set_header Host $host;
+                proxy_pass http://localhost:8069/;
+                proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
+                proxy_redirect off;
+
+                # set headers
+                proxy_set_header    Host            $host;
+                proxy_set_header    X-Real-IP       $remote_addr;
+                proxy_set_header    X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header    X-Forwarded-Proto https;
+        }
 
 	location /doc/ {
 		alias /usr/share/doc/;
