@@ -46,3 +46,4 @@ messagebus:!::
 avahi:!::
 netdev:!::
 fuse:!::
+ssl-cert:!::
