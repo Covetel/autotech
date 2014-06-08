@@ -62,15 +62,6 @@ server {
 		deny all;
 	}
 
-	# Settings for munin
-	location /munin/static/ {
-		alias /etc/munin/static/;
-    	}
-
-	location /munin/ {
-		alias /var/cache/munin/www/;
-       		expires modified +310s;
-	}	
 	# Only for nginx-naxsi used with nginx-naxsi-ui : process denied requests
 	#location /RequestDenied {
 	#	proxy_pass http://127.0.0.1:8080;    
@@ -152,6 +143,18 @@ server {
     	}
 
 	location /munin/ {
+
+		auth_basic            "Restricted stats";
+		auth_basic_user_file  /etc/nginx/htpasswd;
+
+		# not authenticated => no rewrite (back to auth)
+    		if ($remote_user ~ ^$) { break; }
+
+		set $ok "no";
+
+		# admin can see it all
+		if ($remote_user = 'admin') { set $ok "yes"; }
+
 		alias /var/cache/munin/www/;
        		expires modified +310s;
 	}	
