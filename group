@@ -49,3 +49,4 @@ fuse:x:109:
 ssl-cert:x:110:postgres
 openerp:x:111:
 postgres:x:112:
+munin:x:113:

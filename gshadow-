@@ -46,6 +46,6 @@ messagebus:!::
 avahi:!::
 netdev:!::
 fuse:!::
-ssl-cert:!::
+ssl-cert:!::postgres
 openerp:!::
 postgres:!::
