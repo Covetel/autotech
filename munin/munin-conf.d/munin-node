@@ -1,0 +1,4 @@
+[postgres_*]
+user munin
+env.PGUSER munin
+env.PGPORT 5432
