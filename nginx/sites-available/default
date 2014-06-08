@@ -41,6 +41,19 @@ server {
                 proxy_set_header    X-Forwarded-Proto https;
         }
 
+        # proxy buffers
+        proxy_buffers 16 64k;
+        proxy_buffer_size 128k;
+
+	# Settings for cache
+ 	location ~* /web/static/ {
+                proxy_cache_valid 200 60m;
+                proxy_buffering on;
+                expires 864000;
+                proxy_pass http://localhost:8069;
+        }
+
+
 	location /doc/ {
 		alias /usr/share/doc/;
 		autoindex on;
