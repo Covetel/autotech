@@ -9,6 +9,9 @@
         <field name="arch" type="xml">
           <form string="Product">
             <group string="General" colspan="2" col="4">
+              <group colspan="4">
+                <field name="image_medium" widget="image" nolabel="1"/>
+              </group>
               <field name="name"/>
               <field name="public_categ_id" string="Product Type"/>
               <field name="sku"/>
