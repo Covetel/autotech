@@ -8,8 +8,63 @@
         <field name="priority" eval="8"/>
         <field name="arch" type="xml">
           <form string="Product">
-            <field name="name" />
-            <field name="sku" />
+            <group string="General" colspan="2" col="4">
+              <field name="name"/>
+              <field name="public_categ_id" string="Product Type"/>
+              <field name="sku"/>
+              <field name="manufacture"/>
+              <field name="reusable"/>
+            </group>
+            <separator colspan="4"/>
+            <group string="Specific" colspan="2" col="4">
+              <field name="oe_part"/>
+              <field name="chip_id"/>
+              <field name="lenth"/>
+              <field name="keyway_type"/>
+              <field name="keyway_lico"/>
+              <field name="cr_lico"/>
+              <field name="cr_lico_ez"/>
+              <field name="cr_other"/>
+              <field name="cr_strattec"/>
+              <field name="code_series"/>
+              <field name="keyway_jma"/>
+              <field name="compatible"/>
+              <field name="cutter"/>
+              <field name="products_by_make"/>
+              <field name="motor"/>
+              <field name="fcc_id"/>
+              <field name="ic"/>
+              <field name="frequency"/>
+              <field name="number_of_button"/>
+              <field name="material"/>
+              <field name="substitutes"/>
+              <field name="on_board_programming"/>
+              <field name="emergency_key"/>
+              <field name="battery_part "/>
+              <field name="lock_type"/>
+              <field name="coded"/>
+            </group>
+            <separator colspan="4"/>
+            <notebook colspan="4">
+              <page string="Measures">
+                <field name="width"/>
+                <field name="height"/>
+                <field name="weight"/>
+              </page>
+              <page string="More info">
+                <field name="more_info"/>
+              </page>
+              <page string="Sale">
+                  <field name="lst_price"/>
+                  <field name="standard_price"/>
+              </page>
+              <page string="Status">
+                  <group colspan="4">
+                    <field name="state"/>
+                    <field name="product_manager"/>
+                  </group>
+              </page>
+            </notebook>
           </form>
         </field>
     </record>
@@ -20,8 +75,9 @@
         <field name="priority" eval="8"/>
         <field name="arch" type="xml">
           <tree string="Products">
-            <field name="name" />
-            <field name="sku" />
+            <field name="name"/>
+            <field name="public_categ_id" string="Product Type"/>
+            <field name="sku"/>
           </tree>
         </field>
     </record>
@@ -70,5 +126,5 @@
 
     <menuitem id="product.menu_products" name="Products" parent="base.menu_product" action="autotech_product_action" sequence="1"/>
 
-    </data>
+  </data>
 </openerp>
