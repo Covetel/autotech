@@ -7,7 +7,7 @@
         <field name="model">product.product</field>
         <field name="priority" eval="8"/>
         <field name="arch" type="xml">
-          <form string="Product">
+          <form string="Product" version="7.0">
             <group string="General" colspan="2" col="4">
               <group colspan="4">
                 <field name="image_medium" widget="image" nolabel="1"/>
@@ -50,15 +50,21 @@
             <separator colspan="4"/>
             <notebook colspan="4">
               <page string="Measures">
-                <field name="width"/>
-                <field name="height"/>
-                <field name="weight"/>
+                <label for="width"/>
+                <field name="width" placeholder="Width of Product"/>
+                <label for="height"/>
+                <field name="height" placeholder="Height of Product"/>
+                <label for="weight"/>
+                <field name="weight" placeholder="Weight of product"/>
               </page>
               <page string="More info">
-                <field name="more_info"/>
+                <label for="more_info"/>
+                <field name="more_info" placeholder="More Information"/>
               </page>
               <page string="Sale">
+                  <label for="lst_price"/>
                   <field name="lst_price"/>
+                  <label for="standard_price"/>
                   <field name="standard_price"/>
               </page>
               <page string="Status">
