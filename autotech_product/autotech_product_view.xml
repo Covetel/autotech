@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+  <data>
+
+    <record model="ir.ui.view" id="product_normal_form_view">
+        <field name="name">product.normal.view</field>
+        <field name="model">product.product</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+          <form string="Product">
+            <field name="name" />
+            <field name="sku" />
+          </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="product_product_tree_view">
+        <field name="name">product.product.tree</field>
+        <field name="model">product.product</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+          <tree string="Products">
+            <field name="name" />
+            <field name="sku" />
+          </tree>
+        </field>
+    </record>
+
+    <record id="product_search_form_view" model="ir.ui.view">
+      <field name="name">product.search.form</field>
+      <field name="model">product.product</field>
+      <field name="arch" type="xml">
+        <search string="Product">
+          <filter string="SKU Order" icon="terp-stock_symbol-selection" domain="[]" context="{'group_by': 'sku'}" />
+          <field name="sku"/>
+        </search>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="autotech_product_action">
+      <field name="name">Autotech Product</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">product.product</field>
+      <field name="view_mode">kanban,tree,form</field>
+      <field name="view_type">form</field>
+      <field name="view_id" ref="product_normal_form_view"/>
+      <field name="search_view_id" ref="product_search_form_view"/>
+    </record>
+
+    <record id="open_view_product_tree1" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="product_product_tree_view"/>
+        <field name="act_window_id" ref="autotech_product_action"/>
+    </record>
+
+    <record id="open_view_product_form1" model="ir.actions.act_window.view">
+        <field name="sequence" eval="3"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="product_normal_form_view"/>
+        <field name="act_window_id" ref="autotech_product_action"/>
+    </record>
+
+    <record id="open_view_product_kanban1" model="ir.actions.act_window.view">
+      <field name="sequence" eval="1"/>
+      <field name="view_mode">kanban</field>
+      <field name="view_id" ref="product.product_kanban_view"/>
+      <field name="act_window_id" ref="autotech_product_action"/>
+    </record>
+
+    <menuitem id="product.menu_products" name="Products" parent="base.menu_product" action="autotech_product_action" sequence="1"/>
+
+    </data>
+</openerp>
