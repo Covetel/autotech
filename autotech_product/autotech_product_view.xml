@@ -8,72 +8,74 @@
         <field name="priority" eval="8"/>
         <field name="arch" type="xml">
           <form string="Product" version="7.0">
-            <group string="General" colspan="2" col="4">
-              <group colspan="4">
-                <field name="image_medium" widget="image" nolabel="1"/>
-              </group>
-              <field name="name"/>
-              <field name="public_categ_id" string="Product Type"/>
-              <field name="sku"/>
-              <field name="manufacture"/>
-              <field name="reusable"/>
-            </group>
-            <separator colspan="4"/>
-            <group string="Specific" colspan="2" col="4">
-              <field name="oe_part"/>
-              <field name="chip_id"/>
-              <field name="lenth"/>
-              <field name="keyway_type"/>
-              <field name="keyway_lico"/>
-              <field name="cr_lico"/>
-              <field name="cr_lico_ez"/>
-              <field name="cr_other"/>
-              <field name="cr_strattec"/>
-              <field name="code_series"/>
-              <field name="keyway_jma"/>
-              <field name="compatible"/>
-              <field name="cutter"/>
-              <field name="products_by_make"/>
-              <field name="motor"/>
-              <field name="fcc_id"/>
-              <field name="ic"/>
-              <field name="frequency"/>
-              <field name="number_of_button"/>
-              <field name="material"/>
-              <field name="substitutes"/>
-              <field name="on_board_programming"/>
-              <field name="emergency_key"/>
-              <field name="battery_part "/>
-              <field name="lock_type"/>
-              <field name="coded"/>
-            </group>
-            <separator colspan="4"/>
-            <notebook colspan="4">
-              <page string="Measures">
-                <label for="width"/>
-                <field name="width" placeholder="Width of Product"/>
-                <label for="height"/>
-                <field name="height" placeholder="Height of Product"/>
-                <label for="weight"/>
-                <field name="weight" placeholder="Weight of product"/>
-              </page>
-              <page string="More info">
-                <label for="more_info"/>
-                <field name="more_info" placeholder="More Information"/>
-              </page>
-              <page string="Sale">
-                  <label for="lst_price"/>
-                  <field name="lst_price"/>
-                  <label for="standard_price"/>
-                  <field name="standard_price"/>
-              </page>
-              <page string="Status">
+              <sheet>
+                <group string="General" colspan="2" col="4">
                   <group colspan="4">
-                    <field name="state"/>
-                    <field name="product_manager"/>
+                    <field name="image_medium" widget="image" nolabel="1"/>
                   </group>
-              </page>
-            </notebook>
+                  <field name="name"/>
+                  <field name="public_categ_id" string="Product Type"/>
+                  <field name="sku"/>
+                  <field name="manufacture"/>
+                  <field name="reusable"/>
+                </group>
+                <separator colspan="4"/>
+                <group string="Specific" colspan="2" col="4">
+                  <field name="oe_part"/>
+                  <field name="chip_id"/>
+                  <field name="lenth"/>
+                  <field name="keyway_type"/>
+                  <field name="keyway_lico"/>
+                  <field name="cr_lico"/>
+                  <field name="cr_lico_ez"/>
+                  <field name="cr_other"/>
+                  <field name="cr_strattec"/>
+                  <field name="code_series"/>
+                  <field name="keyway_jma"/>
+                  <field name="compatible"/>
+                  <field name="cutter"/>
+                  <field name="products_by_make"/>
+                  <field name="motor"/>
+                  <field name="fcc_id"/>
+                  <field name="ic"/>
+                  <field name="frequency"/>
+                  <field name="number_of_button"/>
+                  <field name="material"/>
+                  <field name="substitutes"/>
+                  <field name="on_board_programming"/>
+                  <field name="emergency_key"/>
+                  <field name="battery_part "/>
+                  <field name="lock_type"/>
+                  <field name="coded"/>
+                </group>
+                <separator colspan="4"/>
+                <notebook colspan="4">
+                  <page string="Measures">
+                    <label for="width"/>
+                    <field name="width" placeholder="Width of Product"/>
+                    <label for="height"/>
+                    <field name="height" placeholder="Height of Product"/>
+                    <label for="weight"/>
+                    <field name="weight" placeholder="Weight of product"/>
+                  </page>
+                  <page string="More info">
+                    <label for="more_info"/>
+                    <field name="more_info" placeholder="More Information"/>
+                  </page>
+                  <page string="Sale">
+                      <label for="lst_price"/>
+                      <field name="lst_price"/>
+                      <label for="standard_price"/>
+                      <field name="standard_price"/>
+                  </page>
+                  <page string="Status">
+                      <group colspan="4">
+                        <field name="state"/>
+                        <field name="product_manager"/>
+                      </group>
+                  </page>
+                </notebook>
+            </sheet>
           </form>
         </field>
     </record>
