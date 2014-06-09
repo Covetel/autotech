@@ -1,7 +1,7 @@
 {
   "name": "Autotech Product",
   "version": "1.0",
-  "depends": ["base"],
+  "depends": ["base", "sale"],
   "author": "Exds Inc.",
   "category": "Products",
   "description": "Product module for Autotech",
