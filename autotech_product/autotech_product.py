@@ -1,11 +1,18 @@
 # -*- coding: utf-8 -*-
 from openerp.osv import osv, orm, fields
+import pprint
 
 class autotech_product(osv.osv):
     _name = 'product.product'
     _inherit = 'product.product'
 
+    def hide_fields(self, cr, uid, ids, categ, context=None):
+       categ_name = uom_obj=self.pool.get('product.public.category').browse(cr,uid,categ)
+       domain = {'value' : {'domain' : categ_name.name}}
+       return domain
+
     _columns = {
+        'domain' : fields.char("Domain", store=False, invisible="1"),
         'sku' : fields.char("SKU"),
         'weight' : fields.float("Weight"),
         'height' : fields.float("Height"),
@@ -24,7 +31,7 @@ class autotech_product(osv.osv):
         'keyway_jma' : fields.char("Keyway JMA"),
         'compatible' : fields.char("Compatible"),
         'cutter' : fields.char("Cutter"),
-        'products_by_make' : fields.char("Produects By Make"),
+        'products_by_make' : fields.char("Products By Make"),
         'motor' : fields.char("Motor"),
         'more_info' : fields.text("More Info"),
         'fcc_id' : fields.char("FCC ID"),
@@ -36,7 +43,7 @@ class autotech_product(osv.osv):
         'reusable' : fields.boolean("Reusable"),
         'on_board_programming' : fields.char("On Board Programming"),
         'emergency_key' : fields.char("Emergency Key"),
-        'battery_part ' : fields.char("Battery Part"),
+        'battery_part' : fields.char("Battery Part"),
         'lock_type' : fields.char("Lock Type"),
         'coded' : fields.char("Coded"),
     }
