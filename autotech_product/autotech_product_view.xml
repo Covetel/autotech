@@ -14,49 +14,215 @@
                     <field name="image_medium" widget="image" nolabel="1"/>
                   </group>
                   <field name="name"/>
-                  <field name="public_categ_id" string="Product Type"/>
+                  <field name="public_categ_id" string="Product Type" on_change="hide_fields(public_categ_id)"/>
                   <field name="sku"/>
                   <field name="manufacture"/>
-                  <field name="reusable"/>
+                  <field name="reusable"
+                         attrs="{'invisible': [('domain','not in',([
+                         'Transponder Key',
+                         'Remote Head Key',
+                         'Smart - PROX Keys',
+                         ]))]}"/>
+                  <field name="domain"/>
                 </group>
                 <separator colspan="4"/>
                 <group string="Specific" colspan="2" col="4">
-                  <field name="oe_part"/>
-                  <field name="chip_id"/>
-                  <field name="lenth"/>
-                  <field name="keyway_type"/>
-                  <field name="keyway_lico"/>
-                  <field name="cr_lico"/>
-                  <field name="cr_lico_ez"/>
-                  <field name="cr_other"/>
-                  <field name="cr_strattec"/>
-                  <field name="code_series"/>
-                  <field name="keyway_jma"/>
-                  <field name="compatible"/>
-                  <field name="cutter"/>
-                  <field name="products_by_make"/>
-                  <field name="motor"/>
-                  <field name="fcc_id"/>
-                  <field name="ic"/>
-                  <field name="frequency"/>
-                  <field name="number_of_button"/>
-                  <field name="material"/>
-                  <field name="substitutes"/>
-                  <field name="on_board_programming"/>
-                  <field name="emergency_key"/>
-                  <field name="battery_part "/>
-                  <field name="lock_type"/>
-                  <field name="coded"/>
+                  <field name="oe_part"
+                         attrs="{'invisible': [('domain','in',([
+                         'Remote Head Key',
+                         'Protective Covers',
+                         ]))]}"/>
+                  <field name="keyway_type"
+                         attrs="{'invisible': [('domain','not in',([
+                         'Emergency Key',
+                         'Key Shell',
+                         'Horseshore Blade',
+                         'Remote Key Blade',
+                         'Blank Key',
+                         'Transponder Key',
+                         'Remote Head Key',
+                         'Machine ACC',
+                         'Remote ACC',
+                         'Pick and Decoder',
+                         'VATS Keys',
+                         ]))]}"/>
+                  <field name="keyway_lico"
+                         attrs="{'invisible': [('domain','not in',([
+                         'Emergency Key',
+                         'Key Shell',
+                         'Horseshore Blade',
+                         'Remote Key Blade',
+                         'Remote Head Key',
+                         'Pick and Decoder',
+                         ]))]}"/>
+                  <field name="cr_strattec"
+                         attrs="{'invisible': [('domain','not in',([
+                         'Emergency Key',
+                         'Remote Key Blade',
+                         'Remote Head Key',
+                         'Automotive Locks',
+                         'VATS Keys',
+                         ]))]}"/>
+                  <field name="code_series"
+                         attrs="{'invisible': [('domain','not in',([
+                         'Emergency Key',
+                         'Horseshore Blade',
+                         'Remote Key Blade',
+                         'Blank Key',
+                         'Transponder Key',
+                         'Remote Head Key',
+                         'Pick and Decoder',
+                         'VATS Keys',
+                         ]))]}"/>
+                  <field name="keyway_jma"
+                         attrs="{'invisible': [('domain','not in',([
+                         'Emergency Key',
+                         'Key Shell',
+                         'Horseshore Blade',
+                         'Remote Key Blade',
+                         'Remote Head Key',
+                         'Pick and Decoder',
+                         ]))]}"/>
+                  <field name="products_by_make"
+                         attrs="{'invisible': [('domain','in',([
+                         'Machine',
+                         'Horseshore Blade',
+                         'Remote Key Blade',
+                         'Blank Key',
+                         'Locksmith Tools',
+                         'Key Programmer',
+                         'Automotive Locks',
+                         'Battery',
+                         'Lockout Tools',
+                         ]))]}"/>
+                  <field name="compatible"
+                         attrs="{'invisible': [('domain','in',([
+                         'Locksmith Tools',
+                         'Key Programmer',
+                         'Battery',
+                         'Lockout Tools',
+                         ]))]}"/>
+                  <field name="chip_id"
+                         attrs="{'invisible': [('domain','not in',([
+                         'Emergency Key',
+                         'Transponder Key',
+                         'Remote Head Key',
+                         'Transponder Chips'
+                         ]))]}"/>
+                  <field name="lenth"
+                         attrs="{'invisible': [('domain','not in',([
+                         'Machines',
+                         'Key Programmer',
+                         'Machine ACC',
+                         'Programmer ACC',
+                         ]))]}"/>
+                  <field name="number_of_button"
+                         attrs="{'invisible': [('domain','not in',([
+                         'Remote Head Key',
+                         'Remote Transmitter',
+                         'Smart - PROX Keys',
+                         'Protective Covers',
+                         ]))]}"/>
+                  <field name="on_board_programming"
+                         attrs="{'invisible': [('domain','not in',([
+                         'Transponder Key',
+                         'Remote Head Key',
+                         'Remote Transmitter',
+                         'Smart - PROX Keys',
+                         ]))]}"/>
+                  <field name="fcc_id"
+                         attrs="{'invisible': [('domain','not in',([
+                         'Remote Head Key',
+                         'Remote Transmitter',
+                         'Smart - PROX Keys',
+                         ]))]}"/>
+                  <field name="ic"
+                         attrs="{'invisible': [('domain','not in',([
+                         'Remote Head Key',
+                         'Remote Transmitter',
+                         'Smart - PROX Keys',
+                         ]))]}"/>
+                  <field name="battery_part"
+                         attrs="{'invisible': [('domain','not in',([
+                         'Remote Head Key',
+                         'Remote Transmitter',
+                         'Smart - PROX Keys',
+                         ]))]}"/>
+                  <field name="frequency"
+                         attrs="{'invisible': [('domain','not in',([
+                         'Remote Head Key',
+                         'Remote Transmitter',
+                         'Smart - PROX Keys',
+                         ]))]}"/>
+                  <field name="emergency_key"
+                         attrs="{'invisible': [('domain','not in',([
+                         'Remote Head Key',
+                         'Smart - PROX Keys',
+                         ]))]}"/>
+                  <field name="cutter"
+                         attrs="{'invisible': [('domain','not in',([
+                         'Machines',
+                         'Machine ACC',
+                         ]))]}"/>
+                  <field name="lock_type"
+                         attrs="{'invisible': [('domain','not in',([
+                         'Automotive Locks',
+                         ]))]}"/>
+                  <field name="coded"
+                         attrs="{'invisible': [('domain','not in',([
+                         'Automotive Locks',
+                         ]))]}"/>
+                  <field name="motor"
+                         attrs="{'invisible': [('domain','not in',([
+                         'Machines',
+                         ]))]}"/>
+                  <field name="cr_lico"
+                         attrs="{'invisible': [('domain','not in',([
+                         'Blank Key',
+                         'Transponder Key',
+                         ]))]}"/>
+                  <field name="cr_lico_ez"
+                         attrs="{'invisible': [('domain','not in',([
+                         'Blank Key',
+                         'Transponder Key',
+                         ]))]}"/>
+                  <field name="cr_other"
+                         attrs="{'invisible': [('domain','not in',([
+                         'Blank Key',
+                         'Transponder Key',
+                         ]))]}"/>
+                  <field name="material"
+                         attrs="{'invisible': [('domain','not in',([
+                         'Blank Key',
+                         ]))]}"/>
+                  <field name="substitutes"
+                         attrs="{'invisible': [('domain','not in',([
+                         'Blank Key',
+                         ]))]}"/>
                 </group>
                 <separator colspan="4"/>
                 <notebook colspan="4">
                   <page string="Measures">
-                    <label for="width"/>
-                    <field name="width" placeholder="Width of Product"/>
-                    <label for="height"/>
-                    <field name="height" placeholder="Height of Product"/>
                     <label for="weight"/>
                     <field name="weight" placeholder="Weight of product"/>
+                    <label for="width"/>
+                    <field name="width" placeholder="Width of Product"
+                           attrs="{'invisible': [('domain','not in',([
+                           'Machines',
+                           'Key Programmer',
+                           'Battery',
+                           'Machine ACC',
+                           'Programmer ACC',
+                           ]))]}"/>
+                    <label for="height"/>
+                    <field name="height" placeholder="Height of Product"
+                           attrs="{'invisible': [('domain','not in',([
+                           'Machines',
+                           'Key Programmer',
+                           'Battery',
+                           'Machine ACC',
+                           'Programmer ACC',
+                           ]))]}"/>
                   </page>
                   <page string="More info">
                     <label for="more_info"/>
