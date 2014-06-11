@@ -17,7 +17,7 @@ class autotech_product(osv.osv):
         'weight' : fields.float("Weight"),
         'height' : fields.float("Height"),
         'width' :  fields.float("Width"),
-        "manufacture" : fields.many2one('autotech.manufacture', "Manufacture"),
+        "manufacture" : fields.many2one('res.partner', "Manufacture"),
         'oe_part' : fields.char("OE Part"),
         'chip_id' : fields.char("Chip ID"),
         'lenth' : fields.char("Lenth"),
@@ -49,12 +49,3 @@ class autotech_product(osv.osv):
     }
 
 autotech_product()
-
-class autotech_manufacture(osv.osv):
-    _name = 'autotech.manufacture'
-
-    _columns = {
-        'name' : fields.char("Name"),
-    }
-
-autotech_manufacture()
