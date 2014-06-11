@@ -52,7 +52,6 @@ def get_manufacture_id(sock, uid, dbname, dbpass, manufacture_name):
 def create_manufacturers(dbname, dbpass, uid, sock, manufacture):
 
     manufacture.update({'supplier' : True, 'customer' : False})
-    print manufacture
 
     manufacture_id = sock.execute(dbname, uid, dbpass, 'res.partner', 'create', manufacture)
     print "Manufacture %s created" % str(manufacture['name'])
@@ -101,7 +100,6 @@ def create_autotech_products(dbname, dbpass, uid, sock, product):
     except UnboundLocalError:
         pass
 
-    print product
     product_id = sock.execute(dbname, uid, dbpass, 'product.product', 'create', product)
     print "Product %s created" % str(product['name'])
 
@@ -175,7 +173,7 @@ def get_and_create_manufacturers(Base, engine, uid, sock):
 def main():
     (Base, engine) = connect_mysql(mysql_dbuser, mysql_dbpass, mysql_dbhost, mysql_dbname)
     (sock, uid) = connect_odoo(odoo_dbhost, odoo_dbname, odoo_dbuser, odoo_dbpass)
-    #get_and_create_manufacturers(Base, engine, uid, sock)
+    get_and_create_manufacturers(Base, engine, uid, sock)
     get_and_create_products(Base, engine, uid, sock)
 
 main()
