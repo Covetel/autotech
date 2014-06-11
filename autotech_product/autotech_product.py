@@ -6,22 +6,6 @@ class autotech_product(osv.osv):
     _name = 'product.product'
     _inherit = 'product.product'
 
-    def return_view(self, cr, uid, ids, context=None):
-        this = self.browse(cr, uid, ids)[0]
-        ir_model_data = self.pool.get('ir.model.data')
-        compose_form_id = ir_model_data.get_object_reference(cr, uid, 'autotech_product', 'product_detail_form_view')[1]
-        pprint.pprint(this.public_categ_id.name)
-
-        return {
-          'type': 'ir.actions.act_window',
-          'res_model': 'product.product',
-          'view_mode': 'form',
-          'view_type': 'form',
-          'view_id' : [compose_form_id],
-          'res_id': this.id,
-          'views': [(compose_form_id, 'form')],
-        }
-
     def hide_fields(self, cr, uid, ids, categ, context=None):
        categ_name = uom_obj=self.pool.get('product.public.category').browse(cr,uid,categ)
        domain = {'value' : {'domain' : categ_name.name}}
