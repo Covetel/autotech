@@ -203,36 +203,36 @@
                 <separator colspan="4"/>
                 <notebook colspan="4">
                   <page string="Measures">
-                    <label for="weight"/>
-                    <field name="weight" placeholder="Weight of product"/>
-                    <label for="width"/>
-                    <field name="width" placeholder="Width of Product"
-                           attrs="{'invisible': [('domain','not in',([
-                           'Machines',
-                           'Key Programmer',
-                           'Battery',
-                           'Machine ACC',
-                           'Programmer ACC',
-                           ]))]}"/>
-                    <label for="height"/>
-                    <field name="height" placeholder="Height of Product"
-                           attrs="{'invisible': [('domain','not in',([
-                           'Machines',
-                           'Key Programmer',
-                           'Battery',
-                           'Machine ACC',
-                           'Programmer ACC',
-                           ]))]}"/>
+                    <group>
+                        <field name="weight" placeholder="Weight of product"/>
+                        <field name="width" placeholder="Width of Product"
+                               attrs="{'invisible': [('domain','not in',([
+                               'Machines',
+                               'Key Programmer',
+                               'Battery',
+                               'Machine ACC',
+                               'Programmer ACC',
+                               ]))]}"/>
+                        <field name="height" placeholder="Height of Product"
+                               attrs="{'invisible': [('domain','not in',([
+                               'Machines',
+                               'Key Programmer',
+                               'Battery',
+                               'Machine ACC',
+                               'Programmer ACC',
+                               ]))]}"/>
+                    </group>
                   </page>
                   <page string="More info">
-                    <label for="more_info"/>
-                    <field name="more_info" placeholder="More Information"/>
+                    <group>
+                      <field name="more_info" placeholder="More Information"/>
+                    </group>
                   </page>
                   <page string="Sale">
-                      <label for="lst_price"/>
+                    <group>
                       <field name="lst_price"/>
-                      <label for="standard_price"/>
                       <field name="standard_price"/>
+                    </group>
                   </page>
                   <page string="Status">
                       <group colspan="4">
