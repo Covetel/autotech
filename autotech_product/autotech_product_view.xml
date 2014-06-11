@@ -16,7 +16,7 @@
                   <field name="name"/>
                   <field name="public_categ_id" string="Product Type" on_change="hide_fields(public_categ_id)"/>
                   <field name="sku"/>
-                  <field name="manufacture"/>
+                  <field name="manufacture" domain="[('supplier','=',True)]"/>
                   <field name="reusable"
                          attrs="{'invisible': [('domain','not in',([
                          'Transponder Key',
