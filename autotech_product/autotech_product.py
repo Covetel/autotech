@@ -17,7 +17,7 @@ class autotech_product(osv.osv):
         'weight' : fields.float("Weight"),
         'height' : fields.float("Height"),
         'width' :  fields.float("Width"),
-        'manufacture' : fields.char("Manufacture"),
+        "manufacture" : fields.many2one('autotech.manufacture', "Manufacture")
         'oe_part' : fields.char("OE Part"),
         'chip_id' : fields.char("Chip ID"),
         'lenth' : fields.char("Lenth"),
@@ -41,11 +41,20 @@ class autotech_product(osv.osv):
         'material' : fields.char("Material"),
         'substitutes' : fields.char("Substitutes"),
         'reusable' : fields.boolean("Reusable"),
-        'on_board_programming' : fields.char("On Board Programming"),
-        'emergency_key' : fields.char("Emergency Key"),
+        'on_board_programming' : fields.boolean("On Board Programming"),
+        'emergency_key' : fields.boolean("Emergency Key"),
         'battery_part' : fields.char("Battery Part"),
         'lock_type' : fields.char("Lock Type"),
         'coded' : fields.char("Coded"),
     }
 
 autotech_product()
+
+class autotech_manufacture(osv.osv):
+    _name = 'autotech.manufacture'
+
+    _columns = {
+        'name' : fields.char("Name"),
+    }
+
+autotech_manufacture()
