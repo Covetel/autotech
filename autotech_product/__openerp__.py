@@ -7,6 +7,7 @@
   "description": "Product module for Autotech",
   "data": [
       "autotech_product_view.xml",
+      "categories.xml",
   ],
   "installable": True,
   "auto_install": False,
