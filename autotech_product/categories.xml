@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+  <data>
+
+    <record model="product.public.category" id="product_public_category_1">
+      <field name="name">Emergency Key</field>
+    </record>
+
+    <record model="product.public.category" id="product_public_category_2">
+      <field name="name">Key Shell</field>
+    </record>
+
+    <record model="product.public.category" id="product_public_category_3">
+      <field name="name">Machines</field>
+    </record>
+
+    <record model="product.public.category" id="product_public_category_4">
+      <field name="name">Horseshore Blade</field>
+    </record>
+
+    <record model="product.public.category" id="product_public_category_5">
+      <field name="name">Remote Key Blade</field>
+    </record>
+
+    <record model="product.public.category" id="product_public_category_6">
+      <field name="name">Blank Key</field>
+    </record>
+
+    <record model="product.public.category" id="product_public_category_7">
+      <field name="name">Locksmith Tools</field>
+    </record>
+
+    <record model="product.public.category" id="product_public_category_8">
+      <field name="name">Transponder Key</field>
+    </record>
+
+    <record model="product.public.category" id="product_public_category_9">
+      <field name="name">Key Programmer</field>
+    </record>
+
+    <record model="product.public.category" id="product_public_category_10">
+      <field name="name">Remote Head Key</field>
+    </record>
+
+    <record model="product.public.category" id="product_public_category_11">
+      <field name="name">Automotive Locks</field>
+    </record>
+
+    <record model="product.public.category" id="product_public_category_12">
+      <field name="name">Battery</field>
+    </record>
+
+    <record model="product.public.category" id="product_public_category_13">
+      <field name="name">Machine ACC</field>
+    </record>
+
+    <record model="product.public.category" id="product_public_category_14">
+      <field name="name">Remote Transmitter</field>
+    </record>
+
+    <record model="product.public.category" id="product_public_category_15">
+      <field name="name">Pick and Decoder</field>
+    </record>
+
+    <record model="product.public.category" id="product_public_category_16">
+      <field name="name">Programmer ACC</field>
+    </record>
+
+    <record model="product.public.category" id="product_public_category_17">
+      <field name="name">Remote ACC</field>
+    </record>
+
+    <record model="product.public.category" id="product_public_category_18">
+      <field name="name">Lockout Tools</field>
+    </record>
+
+    <record model="product.public.category" id="product_public_category_29">
+      <field name="name">Software / Token</field>
+    </record>
+
+    <record model="product.public.category" id="product_public_category_20">
+      <field name="name">Transponder Chips</field>
+    </record>
+
+    <record model="product.public.category" id="product_public_category_21">
+      <field name="name">Smart - PROX Keys</field>
+    </record>
+
+    <record model="product.public.category" id="product_public_category_22">
+      <field name="name">VATS Keys</field>
+    </record>
+
+    <record model="product.public.category" id="product_public_category_23">
+      <field name="name">Services</field>
+    </record>
+
+    <record model="product.public.category" id="product_public_category_24">
+      <field name="name">Protective Covers'</field>
+    </record>
+
+  </data>
+</openerp>
