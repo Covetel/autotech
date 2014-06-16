@@ -4,15 +4,16 @@ from sqlalchemy.orm import Session
 from sqlalchemy import create_engine
 
 import xmlrpclib, pprint
+import base64
 
 mysql_dbuser = 'root'
-mysql_dbpass = '123321...'
-mysql_dbname = 'autotech'
+mysql_dbpass = 'root'
+mysql_dbname = 'autotech_osc'
 mysql_dbhost = 'localhost'
 
 odoo_dbuser = 'admin'
-odoo_dbpass = '123321...'
-odoo_dbname = 'autotech'
+odoo_dbpass = ''
+odoo_dbname = 'autotech_backup01'
 odoo_dbhost = 'localhost'
 
 def connect_mysql(dbuser, dbpass, dbhost, dbname):
@@ -48,6 +49,13 @@ def get_manufacture_id(sock, uid, dbname, dbpass, manufacture_name):
     manufacture_id = sock.execute(dbname, uid, dbpass, 'res.partner', 'search', filt)
 
     return manufacture_id
+
+def exist_product(sock, uid, dbname, dbpass, product):
+    filt = [('name','=', product)]
+
+    product_id = sock.execute(dbname, uid, dbpass, 'product.product', 'search', filt)
+
+    return product_id
 
 def create_manufacturers(dbname, dbpass, uid, sock, manufacture):
 
@@ -100,8 +108,12 @@ def create_autotech_products(dbname, dbpass, uid, sock, product):
     except UnboundLocalError:
         pass
 
-    product_id = sock.execute(dbname, uid, dbpass, 'product.product', 'create', product)
-    print "Product %s created" % str(product['name'])
+    if not exist_product(sock, uid, dbname, dbpass, product['name']):
+        print "creating %s" % str(product['name'])
+        product_id = sock.execute(dbname, uid, dbpass, 'product.product', 'create', product)
+        print "v %s created" % str(product['name'])
+    else:
+        print "Product %s " % str(product['name'])        
 
 def get_and_create_products(Base, engine, uid, sock):
     product_list = []
@@ -116,6 +128,9 @@ def get_and_create_products(Base, engine, uid, sock):
 
     #Table with types of products
     products_options = Base.classes.products_options
+
+    #Table with image of products
+    products_images = Base.classes.products_images
 
     #Table with manufacturers
     products_manufacturers =  Base.classes.manufacturers
@@ -144,6 +159,18 @@ def get_and_create_products(Base, engine, uid, sock):
 
         query_attributes = session.query(products_attributes).filter(products_attributes.products_id == product.products_id)
         attributes = query_attributes.all()
+        
+        query_images = session.query(products_images).filter(products_images.products_id == product.products_id)
+        images = query_images.all()
+
+        for image in images:
+            try:
+                objectfile = open('images/' + image.image, 'r')
+                readedimage = objectfile.read()
+                encoded64 = base64.b64encode(readedimage)
+                autotech_product.update({'image_medium' : encoded64})
+            except IOError:
+                autotech_product.update({'image_medium' : ""})
 
         for attr in attributes:
             try:
@@ -173,7 +200,7 @@ def get_and_create_manufacturers(Base, engine, uid, sock):
 def main():
     (Base, engine) = connect_mysql(mysql_dbuser, mysql_dbpass, mysql_dbhost, mysql_dbname)
     (sock, uid) = connect_odoo(odoo_dbhost, odoo_dbname, odoo_dbuser, odoo_dbpass)
-    get_and_create_manufacturers(Base, engine, uid, sock)
+    #get_and_create_manufacturers(Base, engine, uid, sock)
     get_and_create_products(Base, engine, uid, sock)
 
 main()
