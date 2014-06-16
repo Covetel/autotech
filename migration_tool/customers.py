@@ -5,78 +5,89 @@ from sqlalchemy.orm import Session
 from sqlalchemy import *
 import xmlrpclib
 
-Base = automap_base()
 
-#Conexion
-engine = create_engine('mysql://root:root@localhost/autotech_osc')
+#Conexion Mysql
+mysql_dbname = 'autotech_osc'
+mysql_dbuser = 'root'
+mysql_dbpass = 'root'
+mysql_dbhost = 'localhost'
 
-Base.prepare(engine, reflect=True)
+# Conexion Odoo
+odoo_dbuser = "admin"
+odoo_dbpass = "7Twiljebrath"
+odoo_dbname = "autotech_backup01"
+odoo_dbhost = 'localhost'
 
-#Schemas de la tablas
-customers = Base.classes.customers
-address_book = Base.classes.address_book
+def connect_mysql(dbuser, dbpass, dbhost, dbname):
+    Base = automap_base()
+    engine = create_engine('mysql://'+dbuser+':'+dbpass+'@'+dbhost+'/'+dbname)
+    Base.prepare(engine, reflect=True)
 
-#De aqui saco el id para la categoria
-products_attributes =  Base.classes.products_attributes
+    return Base, engine
 
+def connect_odoo(dbhost, dbname, dbuser, dbpass):
+    sock_common = xmlrpclib.ServerProxy ('http://'+dbhost+':8069/xmlrpc/common')
+    uid = sock_common.login(dbname, dbuser, dbpass)
 
-session = Session(engine)
+    sock = xmlrpclib.ServerProxy('http://'+dbhost+':8069/xmlrpc/object')
 
-for ins in session.query(customers, address_book). \
-                   filter(customers.customers_id == address_book.customers_id). \
-                   limit(1):
+    return sock, uid
 
-    partner = {
-        'name': ins.customers.customers_firstname + " " + ins.customers.customers_lastname,
-        'street': ins.address_book.entry_street_address,
-        'type' : 'default',
-        '': ins.address_book.entry_company,
-        'is_company': ins.address_book.entry_company,
-        'zip': ins.address_book.entry_postcode,
-        'city': ins.address_book.entry_city,
-        'email': ins.customers.customers_email_address,
-        'phone': ins.customers.customers_telephone,
-        'fax': ins.customers.customers_fax,
-        'active': True,
-    }
-    print ins.customers.customers_id, \
-          ins.customers.customers_id, \
-          ins.customers.customers_gender, \
-          ins.customers.customers_firstname, \
-          ins.customers.customers_lastname, \
-          ins.customers.customers_dob, \
-          ins.customers.customers_email_address, \
-          ins.customers.customers_default_address_id , \
-          ins.customers.customers_telephone, \
-          ins.customers.customers_fax, \
-          ins.customers.customers_password, \
-          ins.customers.customers_newsletter, \
-          ins.customers.member_level, \
-          ins.customers.is_license, \
-          ins.customers.license_number, \
-          ins.address_book.entry_company, \
-          ins.address_book.entry_gender, \
-          ins.address_book.entry_firstname, \
-          ins.address_book.entry_lastname, \
-          ins.address_book.entry_street_address, \
-          ins.address_book.entry_suburb, \
-          ins.address_book.entry_postcode, \
-          ins.address_book.entry_city, \
-          ins.address_book.entry_state, \
-          ins.address_book.entry_country_id, \
-          ins.address_book.entry_zone_id 
+def create_customer(dbname, dbpass, uid, sock, customer):
 
-username = "admin"
-pwd = "123"
-dbname = "autotech-website"
+    #customer.update({'supplier' : False, 'customer' : True})
 
-sock_common = xmlrpclib.ServerProxy ('http://localhost:8069/xmlrpc/common')
-uid = sock_common.login(dbname, username, pwd)
+    customer_id = sock.execute(dbname, uid, dbpass, 'res.partner', 'create', customer)
+    print "customer %s created" % str(customer['name'])
 
-sock = xmlrpclib.ServerProxy('http://localhost:8069/xmlrpc/object')
+def get_customers(Base, engine, uid, sock):
+    customers = [] 
 
-args = [('id', '=', '6'),]
-ids = sock.execute(dbname, uid, pwd, 'res.partner', 'search', args)
+    # Schemas de la tablas
+    customers_table = Base.classes.customers
+    address_book_table = Base.classes.address_book
+    products_attributes_table =  Base.classes.products_attributes
 
-partner_id = sock.execute(dbname, uid, pwd, 'res.partner', 'write', ids, partner)
+    
+    session = Session(engine)
+
+    customers_query = session.query(customers_table, address_book_table). \
+                      filter(customers_table.customers_id == address_book_table.customers_id). \
+                      all()
+    for item in customers_query:
+        parent = {
+            'name' : item.address_book.entry_company,
+            'is_company' : True,
+        }
+        partner = {
+            'name': item.customers.customers_firstname.title() + " " + item.customers.customers_lastname.title(),
+            'street': item.address_book.entry_street_address.upper(),
+            'type' : 'default',
+            #'parent_id': , 
+            'customer' : 'True',
+            'supplier' : 'False',
+            #'is_company': item.address_book.entry_company,
+            'zip': item.address_book.entry_postcode,
+            'city': item.address_book.entry_city.upper(),
+            'email': item.customers.customers_email_address,
+            'phone': item.customers.customers_telephone,
+            'fax': item.customers.customers_fax,
+            'active': True,
+        }
+        customers.append(partner)
+        create_customer(odoo_dbname, odoo_dbpass, uid, sock, partner)
+
+    #print customers
+
+def main():
+    (Base, engine) = connect_mysql(mysql_dbuser, mysql_dbpass, mysql_dbhost, mysql_dbname)
+    (sock, uid) = connect_odoo(odoo_dbhost, odoo_dbname, odoo_dbuser, odoo_dbpass)
+    get_customers(Base, engine, uid, sock)
+
+main()
+
+#    args = [('id', '=', '6'),]
+#    ids = sock.execute(dbname, uid, pwd, 'res.partner', 'search', args)
+#
+#    partner_id = sock.execute(dbname, uid, pwd, 'res.partner', 'write', ids, partner)
 
