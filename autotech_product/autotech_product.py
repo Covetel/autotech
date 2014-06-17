@@ -11,8 +11,13 @@ class autotech_product(osv.osv):
        domain = {'value' : {'domain' : categ_name.name}}
        return domain
 
+    def _get_type(self, cr, uid, ids, fields, arg, context=None):
+       product = self.browse(cr,uid,ids)[0]
+       categ_name = product.public_categ_id
+       return { ids[0] : categ_name.name }
+
     _columns = {
-        'domain' : fields.char("Domain", store=False, invisible="1"),
+        'domain' : fields.function(_get_type, method=True, type="char", string="Domain", store=False, invisible="1"),
         'sku' : fields.char("SKU"),
         'weight' : fields.float("Weight"),
         'height' : fields.float("Height"),
